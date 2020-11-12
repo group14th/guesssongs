@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 export default {
   name: 'LandingPage',
   data () {
@@ -36,6 +37,9 @@ export default {
       if (this.username) {
         localStorage.setItem('username', this.username)
         this.$router.push('/lobby')
+        swal(`Welcome, ${this.username}!`, 'You are in game lobby! Wait for the other players', 'success')
+      } else {
+        swal('You forget something!', 'Username cannot be empty! Please enter anything to get into the lobby', 'info')
       }
     }
   }
