@@ -35,12 +35,18 @@ export default {
   methods: {
     letsGo () {
       if (this.username) {
+        console.log('A')
         localStorage.setItem('username', this.username)
-        this.$router.push('/lobby')
-        swal(`Welcome, ${this.username}!`, 'You are in game lobby! Wait for the other players', 'success')
+        this.$socket.emit('letsGo', this.username)
       } else {
         swal('You forget something!', 'Username cannot be empty! Please enter anything to get into the lobby', 'info')
       }
+    }
+  },
+  sockets: {
+    'jumpto-lobby': function () {
+      this.$router.push('/lobby')
+      swal(`Welcome, ${this.username}!`, 'You are in game lobby! Wait for the other players', 'success')
     }
   }
 }
