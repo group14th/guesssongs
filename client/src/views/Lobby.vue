@@ -23,6 +23,7 @@ export default {
   name: 'Lobby',
   data () {
     return {
+      onlineUsers: [],
       username: localStorage.getItem('username')
     }
   },
@@ -49,6 +50,18 @@ export default {
     // toGame () {
     //   this.$router.push('/')
     // }
+  },
+  sockets: {
+    'update-onlineUsers': function (onlineUsers) {
+      this.onlineUsers = onlineUsers
+    }
+    // 'update-room': function (rooms) {
+    //   this.rooms = rooms
+    // }
+  },
+  created () {
+    this.$socket.emit('get-onlineUsers')
+    // this.$socket.emit('get-rooms')
   }
 }
 </script>
