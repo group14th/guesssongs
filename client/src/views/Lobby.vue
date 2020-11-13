@@ -11,7 +11,7 @@
           class="list-group list-group-flush"
           style="background-color: #f54242"
         >
-          <OnlineUsers></OnlineUsers>
+          <OnlineUsers v-for="user in onlineUsers" :key="user.id" :user="user"></OnlineUsers>
         </ul>
       </div>
       <div
@@ -56,6 +56,7 @@ export default {
         dangerMode: true
       }).then((leaveLobby) => {
         if (leaveLobby) {
+          // this.$socket.emit('remove-user', this.username)
           localStorage.clear()
           this.$router.push('/')
           swal(
@@ -76,6 +77,7 @@ export default {
   sockets: {
     'update-onlineUsers': function (onlineUsers) {
       this.onlineUsers = onlineUsers
+      console.log(this.onlineUsers)
     }
     // 'update-room': function (rooms) {
     //   this.rooms = rooms
