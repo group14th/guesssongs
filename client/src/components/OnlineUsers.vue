@@ -1,6 +1,6 @@
 <template>
   <li class="list-group-item" style="background-color: #f54242">
-    UserNAME
+    {{ user.name }}
     <svg
       width="1em"
       height="1em"
@@ -26,7 +26,8 @@
 
 <script>
 export default {
-  name: 'OnlineUsers'
+  name: 'OnlineUsers',
+  props: ['user']
 }
 </script>
 
