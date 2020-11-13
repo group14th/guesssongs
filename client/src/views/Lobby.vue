@@ -1,17 +1,32 @@
 <template>
-  <div id="lobby-page" class="container d-flex justify-content-center">
-    <div
-      class="card px-3 py-3"
-      style="background-color: #f54242; width: 25rem; margin: 34px"
-    >
-      <img src="../assets/boy.png" class="card-img-top" alt="" />
-      <div class="card-body text-light">
-        <h2 class="card-title">Welcome, {{ username }}!</h2>
-        <p class="card-text">Are you ready to play?</p>
-        <a href="" class="btn btn-light mr-1">YEP!!</a>
-        <a href="" class="btn btn-light" @click.prevent="toLanding"
-          >Noo, I'm done</a
+  <div id="lobby-page" class="container">
+    <div class="row">
+      <div
+        class="card px-3 py-3 col-3 my-2 text-light"
+        style="background-color: #f54242; margin: 0 auto"
+      >
+        <img src="../assets/boy.png" class="card-img-top" alt="" />
+        <h2 class="my-2">Online users</h2>
+        <ul
+          class="list-group list-group-flush"
+          style="background-color: #f54242"
         >
+          <OnlineUsers></OnlineUsers>
+        </ul>
+      </div>
+      <div
+        class="card px-3 py-3 col-7 my-2"
+        style="background-color: #f54242; margin: 0 auto"
+      >
+        <img src="../assets/body-bg.jpg" class="card-img-top" alt="" />
+        <div class="card-body text-light">
+          <h2 class="card-title">Welcome, {{ username }}!</h2>
+          <p class="card-text">Are you ready to play?</p>
+          <a href="" class="btn btn-light mr-1">YEP!!</a>
+          <a href="" class="btn btn-light" @click.prevent="toLanding"
+            >Noo, I'm done</a
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -19,8 +34,12 @@
 
 <script>
 import swal from 'sweetalert'
+import OnlineUsers from '../components/OnlineUsers'
 export default {
   name: 'Lobby',
+  components: {
+    OnlineUsers
+  },
   data () {
     return {
       username: localStorage.getItem('username')
@@ -38,9 +57,12 @@ export default {
         if (leaveLobby) {
           localStorage.clear()
           this.$router.push('/')
-          swal("Oof, you have been back to the landing page. Don't forget to re-fill the username form!", {
-            icon: 'info'
-          })
+          swal(
+            "Oof, you have been back to the landing page. Don't forget to re-fill the username form!",
+            {
+              icon: 'info'
+            }
+          )
         } else {
           swal("You are not leaving, aren't you? Be prepared for the game!")
         }
