@@ -8,7 +8,7 @@
       <div class="card-body text-light">
         <h2 class="card-title">Welcome, {{ username }}!</h2>
         <p class="card-text">Are you ready to play?</p>
-        <a href="" class="btn btn-light mr-1">YEP!!</a>
+        <a href="" @click.prevent="inGame()" class="btn btn-light mr-1">YEP!!</a>
         <a href="" class="btn btn-light" @click.prevent="toLanding"
           >Noo, I'm done</a
         >
@@ -28,6 +28,10 @@ export default {
     }
   },
   methods: {
+    inGame () {
+      this.$router.push('/ingame')
+      console.log('this.inGame')
+    },
     toLanding () {
       swal({
         title: 'Are you sure?',

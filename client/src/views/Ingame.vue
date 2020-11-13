@@ -5,6 +5,8 @@
     <div class="card">
     <div class="card-body">
       <h3 class="card-title text-center">Guess the song !</h3>
+      <button type="button" @click="fetchSong()" class="btn btn-primary">Play Game</button>
+      <source :src="song" type="audio/ogg">
       <button type="button" class="btn btn-primary">Next</button>
     </div>
   </div>
@@ -28,9 +30,34 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
-  name: 'ingame'
+  name: 'ingame',
+  components: {
+  },
+  methods: {
+    fetchSong () {
+      axios({
+        url: 'http://localhost:3000/songs',
+        methods: 'GET'
+      })
+        .then(({ data }) => {
+          this.songs = data
+          this.song = data[0].embed
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  data () {
+    return {
+      songs: [],
+      song: ''
+    }
+  }
 }
 </script>
 
